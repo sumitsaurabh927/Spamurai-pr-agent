@@ -13,7 +13,10 @@
   "dependencies": {
     "@motiadev/core": "0.1.0-beta.28",
     "@motiadev/workbench": "0.1.0-beta.28",
+    "@octokit/rest": "^21.1.1",
+    "axios": "^1.9.0",
     "motia": "0.1.0-beta.28",
+    "openai": "^4.97.0",
     "react": "^19.0.0",
     "zod": "^3.24.4"
   },
