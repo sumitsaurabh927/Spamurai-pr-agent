@@ -8,9 +8,7 @@
     "dev:debug": "motia dev --debug",
     "clean": "rm -rf dist node_modules python_modules .motia .mermaid",
     "test": "NODE_ENV=test vitest",
-    "test:watch": "NODE_ENV=test jest --watch",
-    "test:coverage": "NODE_ENV=test jest --coverage",
-    "test:coverage:report": "NODE_ENV=test jest --coverage && open coverage/lcov-report/index.html"
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "keywords": [
     "motia"
@@ -28,10 +26,13 @@
   "devDependencies": {
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-typescript": "^7.27.1",
+    "@eslint/js": "^9.26.0",
     "@types/node": "^22.15.17",
     "@types/react": "^18.3.18",
+    "eslint": "^9.26.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
+    "typescript-eslint": "^8.32.0",
     "vitest": "^3.1.3"
   }
 }

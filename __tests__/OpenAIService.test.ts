@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
 import OpenAI from 'openai'
 import { OpenAIService } from '../services/open-ai.service'
