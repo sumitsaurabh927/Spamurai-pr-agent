@@ -99,7 +99,7 @@ export const handler: StepHandler<typeof config> = async (req, { emit, logger })
   } else {
     logger.warn('[PR Webhook] Unsupported action', { action })
   }
-
+  logger.info('Completed the PR webhook step')
   return {
     status: 200,
     body: { message: 'Webhook processed successfully' },

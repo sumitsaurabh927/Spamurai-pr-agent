@@ -35,6 +35,7 @@ export const handler: StepHandler<typeof config> = async (input, { logger, emit 
         topic: `github.pr.analysed`,
         data: { body: isSpammy.feedback, prNumber: input.prNumber, owner: input.owner, repo: input.repo, isSpam: isSpammy.isSpam, installationId: input.installationId, recommendedAction: isSpammy.recommendedAction },
     })
+    logger.info('Completed the spam detection step')
 }
 
 async function checkIfPRIsSpam({ prTitle, prDescription, prDiff }: { prTitle: string, prDescription: string, prDiff: string }): Promise<{ isSpam: boolean, spamConfidence: number, PRConfidence: number, quality: number, reasons: string[], feedback: string, recommendedAction: "close" | "request_changes" | "approve" | "none" }> {

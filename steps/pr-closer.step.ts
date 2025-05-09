@@ -31,4 +31,5 @@ export const handler: StepHandler<typeof config> = async (input, { logger }) => 
         const githubService = new GithubService()
         await githubService.closePullRequest(input.owner, input.repo, input.prNumber, input.installationId)
     }
+    logger.info('Completed the PR closer step')
 }

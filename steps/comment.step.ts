@@ -35,4 +35,5 @@ export const handler: StepHandler<typeof config> = async (input, { logger, emit 
         topic: `github.pr.commented`,
         data: { prNumber: input.prNumber, owner: input.owner, repo: input.repo, isSpam: input.isSpam, installationId: input.installationId, recommendedAction: input.recommendedAction },
     })
+    logger.info('Completed the comment step')
 }
