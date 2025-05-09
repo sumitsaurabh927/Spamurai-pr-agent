@@ -1,8 +1,8 @@
 {
   "default": {
     "steps/api.step.ts": {
-      "x": 0,
-      "y": 186
+      "x": -48.71748705705531,
+      "y": 248.20848347285525
     },
     "steps/noop.step.ts": {
       "x": 46.5,
@@ -21,6 +21,28 @@
     "steps/pr-webhook.step.ts": {
       "x": 0,
       "y": 0
+    }
+  },
+  "github-pr-agent": {
+    "steps/pr-webhook.step.ts": {
+      "x": 341.5431393978345,
+      "y": -168.23422312961276
+    },
+    "steps/comment.step.ts": {
+      "x": 433.5940100857872,
+      "y": 256.1133898698775
+    },
+    "steps/spam-detection.step.ts": {
+      "x": 413.4261496920308,
+      "y": 98.19785585246915
+    },
+    "steps/noop.step.ts": {
+      "x": 373.8544907526998,
+      "y": -391.8040098448635
+    },
+    "steps/pr-closer.step.ts": {
+      "x": 205,
+      "y": 660
     }
   }
 }

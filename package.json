@@ -13,6 +13,7 @@
   "dependencies": {
     "@motiadev/core": "0.1.0-beta.28",
     "@motiadev/workbench": "0.1.0-beta.28",
+    "@octokit/auth-app": "^7.2.1",
     "@octokit/rest": "^21.1.1",
     "axios": "^1.9.0",
     "motia": "0.1.0-beta.28",

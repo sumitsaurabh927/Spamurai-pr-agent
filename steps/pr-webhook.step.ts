@@ -1,8 +1,6 @@
 import { z } from 'zod'
 import type { ApiRouteConfig, StepHandler } from 'motia'
 import axios from 'axios'
-import { GithubService } from '../services/github.service'
-import { OpenAIService } from '../services/open-ai.service'
 
 
 const webhookSchema = z.object({
@@ -50,7 +48,7 @@ export const config: ApiRouteConfig = {
     {
       topic: 'github.pr.edited',
       label: 'PR content updated',
-    },
+    }
   ],
   bodySchema: webhookSchema,
   flows: ['github-pr-agent'],
@@ -58,8 +56,8 @@ export const config: ApiRouteConfig = {
 
 export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
   const { action, pull_request: pr, repository } = req.body
-  console.log('running....')
-  // console.log(req.body)
+  console.log('running')
+  console.log(req.body)
   if (!pr) {
     console.log('no pr')
     return {
@@ -89,35 +87,22 @@ export const handler: StepHandler<typeof config> = async (req, { emit, logger })
 
   const baseEventData = {
     prNumber: pr.number,
-    title: pr.title,
-    body: pr.body || '',
-    diff,
-    state: pr.state,
-    labels: pr.labels ? pr.labels.map((l: { name: string }) => l.name) : [],
-    author: pr.user.login,
+    prTitle: pr.title,
+    prDescription: pr.body || '',
+    prDiff: diff,
     owner,
     repo,
-    baseBranch: pr.base.ref,
-    headBranch: pr.head.ref,
-    commitSha: pr.head.sha,
-    url: pr.html_url,
+    installationId: req.body.installation.id
   }
 
+  console.log('logging body: ', req.body.installation)
 
   if (action === 'opened' || action === 'edited') {
+    console.log(baseEventData)
     await emit({
       topic: `github.pr.${action}`,
       data: baseEventData,
     })
-
-
-    const isSpammy = await checkIfPRIsSpam({ prDiff: diff, prTitle: pr.title, prDescription: pr.body })
-
-    if (isSpammy) {
-      const comment = `⚠️ This PR looks suspicious or may be spammy. Please make sure it follows the community guidelines.`
-      const githubService = new GithubService()
-      await githubService.createComment(owner, repo, pr.number, comment)
-    }
   } else {
     logger.warn('[PR Webhook] Unsupported action', { action })
   }
@@ -126,14 +111,4 @@ export const handler: StepHandler<typeof config> = async (req, { emit, logger })
     status: 200,
     body: { message: 'Webhook processed successfully' },
   }
-}
-
-
-async function checkIfPRIsSpam({ prTitle, prDescription, prDiff }: { prTitle: string, prDescription: string, prDiff: string }): Promise<boolean> {
-  console.log('checking for spam--diff')
-  console.log(prDiff)
-  const openAIService = new OpenAIService()
-  const resp = await openAIService.analyzePRForSpam({ prTitle, prDescription, prDiff })
-  console.log(resp)
-  return false
 }

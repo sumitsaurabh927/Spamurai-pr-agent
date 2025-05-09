@@ -1,4 +1,3 @@
-// Enum for the possible PR Labels (you can customize this based on your needs)
 export enum PRLabel {
     SPAM = 'spam',
     WIP = 'wip',  // Work in Progress

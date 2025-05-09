@@ -1,4 +1,3 @@
-// Enum for Spam Detection Status
 export enum SpamStatus {
     CLEAN = 'clean',
     SPAMMY = 'spammy',

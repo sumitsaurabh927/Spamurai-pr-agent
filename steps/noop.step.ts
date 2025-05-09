@@ -1,10 +1,15 @@
-import { NoopConfig } from 'motia'
+import type { NoopConfig } from 'motia'
 
 export const config: NoopConfig = {
   type: 'noop',
-  name: 'Flow Starter',
-  description: 'Start the default flow',
+  name: 'Test Spamurai PR',
+  description: 'Simulates GitHub PR webhook events to test Spamurai flow',
+  virtualEmits: [
+    {
+      topic: "/webhooks/github",
+      label: 'Simulate a fake PR event'
+    }
+  ],
   virtualSubscribes: [],
-  virtualEmits: ['/default'],
-  flows: ['default'],
-} 
+  flows: ['github-pr-agent'],
+}

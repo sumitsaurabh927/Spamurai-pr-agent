@@ -80,8 +80,6 @@ export class OpenAIService {
                 temperature: 0.5,
             })
             const analysis = response.choices[0].message.content || '[]'
-            console.log('i am here')
-            console.log(JSON.stringify(response, null, 2))
             return JSON.parse(analysis)
         } catch (error) {
             console.error('Error analyzing PR:', error)
