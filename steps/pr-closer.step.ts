@@ -29,8 +29,6 @@ export const handler: StepHandler<typeof config> = async (input, { logger }) => 
     logger.info('received analysis-completed event', input)
     if (input.isSpam && input.recommendedAction === 'close') {
         const githubService = new GithubService()
-
+        await githubService.closePullRequest(input.owner, input.repo, input.prNumber, input.installationId)
     }
-
-    // await githubService.createComment(input.owner, input.repo, input.prNumber, input.body, input.installationId)
 }

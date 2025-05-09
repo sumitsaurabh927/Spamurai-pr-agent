@@ -56,10 +56,7 @@ export const config: ApiRouteConfig = {
 
 export const handler: StepHandler<typeof config> = async (req, { emit, logger }) => {
   const { action, pull_request: pr, repository } = req.body
-  console.log('running')
-  console.log(req.body)
   if (!pr) {
-    console.log('no pr')
     return {
       status: 404,
       body: { message: 'no pr found' },
@@ -95,10 +92,7 @@ export const handler: StepHandler<typeof config> = async (req, { emit, logger })
     installationId: req.body.installation.id
   }
 
-  console.log('logging body: ', req.body.installation)
-
   if (action === 'opened' || action === 'edited') {
-    console.log(baseEventData)
     await emit({
       topic: `github.pr.${action}`,
       data: baseEventData,

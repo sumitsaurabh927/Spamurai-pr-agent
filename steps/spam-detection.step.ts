@@ -31,8 +31,6 @@ export const handler: StepHandler<typeof config> = async (input, { logger, emit 
     logger.info('received analysis-completed event', input)
 
     const isSpammy = await checkIfPRIsSpam({ prDiff: input.prDiff, prTitle: input.prTitle, prDescription: input.prDescription })
-    console.log('spam detected steppppppp')
-    console.log(input)
     await emit({
         topic: `github.pr.analysed`,
         data: { body: isSpammy.feedback, prNumber: input.prNumber, owner: input.owner, repo: input.repo, isSpam: isSpammy.isSpam, installationId: input.installationId, recommendedAction: isSpammy.recommendedAction },
@@ -40,10 +38,7 @@ export const handler: StepHandler<typeof config> = async (input, { logger, emit 
 }
 
 async function checkIfPRIsSpam({ prTitle, prDescription, prDiff }: { prTitle: string, prDescription: string, prDiff: string }): Promise<{ isSpam: boolean, spamConfidence: number, PRConfidence: number, quality: number, reasons: string[], feedback: string, recommendedAction: "close" | "request_changes" | "approve" | "none" }> {
-    console.log('checking for spam--diff')
-    console.log(prDiff)
     const openAIService = new OpenAIService()
     const resp = await openAIService.analyzePRForSpam({ prTitle, prDescription, prDiff })
-    console.log(resp)
     return resp
 }

@@ -25,10 +25,7 @@ export const config: EventConfig<Input> = {
 }
 
 export const handler: StepHandler<typeof config> = async (input, { logger }) => {
-    console.log('comment steppppppppppp')
     logger.info('received analysis-completed event', input)
-    console.log('hellow there input', input)
     const githubService = new GithubService()
-
     await githubService.createComment(input.owner, input.repo, input.prNumber, input.body, input.installationId)
 }
