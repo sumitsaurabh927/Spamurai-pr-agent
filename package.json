@@ -1,11 +1,16 @@
 {
   "name": "pr-agent",
   "description": "",
+  "type": "module",
   "scripts": {
     "postinstall": "motia install",
     "dev": "motia dev",
     "dev:debug": "motia dev --debug",
-    "clean": "rm -rf dist node_modules python_modules .motia .mermaid"
+    "clean": "rm -rf dist node_modules python_modules .motia .mermaid",
+    "test": "NODE_ENV=test vitest",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "test:coverage": "NODE_ENV=test jest --coverage",
+    "test:coverage:report": "NODE_ENV=test jest --coverage && open coverage/lcov-report/index.html"
   },
   "keywords": [
     "motia"
@@ -15,15 +20,18 @@
     "@motiadev/workbench": "0.1.0-beta.28",
     "@octokit/auth-app": "^7.2.1",
     "@octokit/rest": "^21.1.1",
-    "axios": "^1.9.0",
     "motia": "0.1.0-beta.28",
     "openai": "^4.97.0",
     "react": "^19.0.0",
     "zod": "^3.24.4"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-typescript": "^7.27.1",
+    "@types/node": "^22.15.17",
     "@types/react": "^18.3.18",
     "ts-node": "^10.9.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^3.1.3"
   }
 }
