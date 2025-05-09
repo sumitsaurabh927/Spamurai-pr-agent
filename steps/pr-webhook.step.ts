@@ -2,7 +2,6 @@ import { z } from 'zod'
 import type { ApiRouteConfig, StepHandler } from 'motia'
 import axios from 'axios'
 
-
 const webhookSchema = z.object({
   action: z.string(),
   pull_request: z.object({

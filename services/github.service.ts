@@ -1,6 +1,5 @@
 import { Octokit } from '@octokit/rest'
 import { createAppAuth } from '@octokit/auth-app'
-import axios from 'axios'
 
 export class GithubService {
     private appId: number
