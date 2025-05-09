@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import type { ApiRouteConfig, StepHandler } from 'motia'
 import axios from 'axios'
+import { GithubEventTopic } from '../types/github-events'
 
 const webhookSchema = z.object({
   action: z.string(),
@@ -41,11 +42,11 @@ export const config: ApiRouteConfig = {
   method: 'POST',
   emits: [
     {
-      topic: 'github.pr.opened',
+      topic: GithubEventTopic.PR_OPENED,
       label: 'New PR created',
     },
     {
-      topic: 'github.pr.edited',
+      topic: GithubEventTopic.PR_EDITED,
       label: 'PR content updated',
     }
   ],
