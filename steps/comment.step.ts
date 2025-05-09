@@ -19,13 +19,20 @@ export const config: EventConfig<Input> = {
     name: 'Comment',
     description: 'Post a contextual comment',
     subscribes: ['github.pr.analysed'],
-    emits: [],
+    emits: [{
+        topic: 'github.pr.commented',
+        label: 'Comment Posted',
+    },],
     input: inputSchema,
     flows: ['github-pr-agent'],
 }
 
-export const handler: StepHandler<typeof config> = async (input, { logger }) => {
-    logger.info('received analysis-completed event', input)
+export const handler: StepHandler<typeof config> = async (input, { logger, emit }) => {
+    logger.info('received github.pr.analysed event', input)
     const githubService = new GithubService()
     await githubService.createComment(input.owner, input.repo, input.prNumber, input.body, input.installationId)
+    await emit({
+        topic: `github.pr.commented`,
+        data: { prNumber: input.prNumber, owner: input.owner, repo: input.repo, isSpam: input.isSpam, installationId: input.installationId, recommendedAction: input.recommendedAction },
+    })
 }

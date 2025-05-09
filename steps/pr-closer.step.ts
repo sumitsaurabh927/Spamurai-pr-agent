@@ -16,9 +16,9 @@ const inputSchema = z.object({
 
 export const config: EventConfig<Input> = {
     type: 'event',
-    name: 'Comment',
-    description: 'Post a contextual comment',
-    subscribes: ['github.pr.analysed'],
+    name: 'PR close',
+    description: 'Closes a spammy PR',
+    subscribes: ['github.pr.commented'],
     emits: [],
     input: inputSchema,
     flows: ['github-pr-agent'],
@@ -26,7 +26,7 @@ export const config: EventConfig<Input> = {
 
 export const handler: StepHandler<typeof config> = async (input, { logger }) => {
 
-    logger.info('received analysis-completed event', input)
+    logger.info('received github.pr.commented event', input)
     if (input.isSpam && input.recommendedAction === 'close') {
         const githubService = new GithubService()
         await githubService.closePullRequest(input.owner, input.repo, input.prNumber, input.installationId)

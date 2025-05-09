@@ -1,7 +1,6 @@
 {
   "name": "pr-agent",
   "description": "",
-  "type": "module",
   "scripts": {
     "postinstall": "motia install",
     "dev": "motia dev",
