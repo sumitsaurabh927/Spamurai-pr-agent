@@ -3,8 +3,10 @@ import { GithubService } from '../services/github.service'
 import { z } from 'zod'
 import { GithubEventTopic } from '../types/github-events'
 
+// type check
 type Input = typeof inputSchema
 
+// schema for event data
 const inputSchema = z.object({
     body: z.string(),
     prNumber: z.number(),
@@ -15,6 +17,7 @@ const inputSchema = z.object({
     recommendedAction: z.string()
 })
 
+// event config for closing pr
 export const config: EventConfig<Input> = {
     type: 'event',
     name: 'PR close',
@@ -25,6 +28,7 @@ export const config: EventConfig<Input> = {
     flows: ['github-pr-agent'],
 }
 
+// handler to close spammy pr
 export const handler: StepHandler<typeof config> = async (input, { logger }) => {
 
     logger.info(`received ${GithubEventTopic.PR_COMMENTED}event`, input)

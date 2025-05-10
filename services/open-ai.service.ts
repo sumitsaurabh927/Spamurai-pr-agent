@@ -1,14 +1,17 @@
 import OpenAI from 'openai';
 
+// service for analysing pr using openAI
 export class OpenAIService {
     private openai: OpenAI
 
+    // initialize openAI client
     constructor() {
         this.openai = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY,
         })
     }
 
+    // analyze a pr with the following prompt
     async analyzePRForSpam({ prTitle, prDescription, prDiff }: { prTitle: string, prDescription: string, prDiff: string }) {
         const prompt = `
             You will receive:

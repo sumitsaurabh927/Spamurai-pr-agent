@@ -1,12 +1,15 @@
 import React from 'react'
 import { BaseHandle, Position } from 'motia/workbench'
 
+// React component for testing Spamurai workflow via UI
 export default function TestSpamuraiPR() {
+    // functin to simulation webhook payloads
     const sendWebhook = (action: 'opened' | 'edited') => {
         const prNumber = Math.floor(Math.random() * 10000)
         const testRepo = 'test-repo'
         const testOwner = 'test-owner'
 
+        // send simulated payload to endpoing
         fetch('/webhooks/github', {
             method: 'POST',
             headers: {

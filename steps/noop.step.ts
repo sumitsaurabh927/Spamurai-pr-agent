@@ -1,5 +1,6 @@
 import type { NoopConfig } from 'motia'
 
+// config for fake github webhook event (for testing)
 export const config: NoopConfig = {
   type: 'noop',
   name: 'Test Spamurai PR',

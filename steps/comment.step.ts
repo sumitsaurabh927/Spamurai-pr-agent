@@ -3,8 +3,10 @@ import { GithubService } from '../services/github.service'
 import { z } from 'zod'
 import { GithubEventTopic } from '../types/github-events'
 
+// type check
 type Input = typeof inputSchema
 
+// schema for input
 const inputSchema = z.object({
     body: z.string(),
     prNumber: z.number(),
@@ -15,6 +17,7 @@ const inputSchema = z.object({
     recommendedAction: z.string()
 })
 
+// event config for posting comment on the PR
 export const config: EventConfig<Input> = {
     type: 'event',
     name: 'Comment',
@@ -28,6 +31,7 @@ export const config: EventConfig<Input> = {
     flows: ['github-pr-agent'],
 }
 
+// handler for posting comment based on pr analysis
 export const handler: StepHandler<typeof config> = async (input, { logger, emit }) => {
     logger.info(`received ${GithubEventTopic.PR_ANALYSED} event`, input)
     const githubService = new GithubService()

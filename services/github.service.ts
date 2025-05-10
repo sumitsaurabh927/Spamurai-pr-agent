@@ -1,6 +1,7 @@
 import { Octokit } from '@octokit/rest'
 import { createAppAuth } from '@octokit/auth-app'
 
+// service to interact with Github's API
 export class GithubService {
     private appId: number
     private privateKey: string
@@ -10,6 +11,7 @@ export class GithubService {
         this.appId = Number(process.env.GITHUB_APP_ID)
         this.privateKey = process.env.GITHUB_PRIVATE_KEY?.replace(/\\n/g, '\n') || ''
 
+        // Initialize Octokit with app-level authentication
         this.octokit = new Octokit({
             authStrategy: createAppAuth,
             auth: {
@@ -19,6 +21,7 @@ export class GithubService {
         })
     }
 
+    // Get installation access token
     async getInstallationAccessToken(installationId: number): Promise<string> {
         try {
             const auth = createAppAuth({
@@ -34,6 +37,7 @@ export class GithubService {
         }
     }
 
+    // Create a pr comment
     async createComment(owner: string, repo: string, prNumber: number, body: string, installationId: number) {
         try {
             const token = await this.getInstallationAccessToken(installationId)
@@ -54,6 +58,7 @@ export class GithubService {
         }
     }
 
+    // close a pr
     async closePullRequest(owner: string, repo: string, pullNumber: number, installationId: number) {
         try {
             const token = await this.getInstallationAccessToken(installationId)
