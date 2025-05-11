@@ -37,7 +37,7 @@ You'll need the following before running this locally:
 ---
 ## Table of Contents
 
-- [Prerequisites](#prerequisites)
+- [Prerequisites](#-prerequisites)
 - [Quickstart](#quick-start)
 - [Configuration](#configuration)
   - [Environment Variables](#environment-variables)
