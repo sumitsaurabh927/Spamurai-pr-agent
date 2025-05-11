@@ -9,12 +9,6 @@ A GitHub PR Assistant powered by [Motia.dev](https://motia.dev) AI Agent Framewo
 ## 📖 Overview
 Close spammy PRs intelligently - This GitHub App automatically monitors pull requests, posts comments, and closes if they are spammy (based on conditions you decide). 
 
-It has been built using [Motia.dev](https://motia.dev) — an AI Agent Framework Built for Engineers, and it:
-- uses a local server (tunneled via [ngrok](https://ngrok.com/)) to receive webhook events, 
-- interacts with [GitHub’s REST API](https://docs.github.com/en/rest?apiVersion=2022-11-28),
-- uses [OpenAI](https://platform.openai.com/) for PR analysis, contextual comments and recommended action, and
-- posts intelligent comment and perform recommended action.
-
 ---
 
 ## ✨ What This App Does
@@ -44,7 +38,7 @@ You'll need the following before running this locally:
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Installation](#installation)
+- [Quickstart](#quick-start)
 - [Configuration](#configuration)
   - [Environment Variables](#environment-variables)
   - [GitHub App Setup](#github-app-setup)
